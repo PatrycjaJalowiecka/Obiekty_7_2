@@ -1,26 +1,32 @@
+from random import Random
+random = Random
+
 class Movies:
     movie_tracker = []    
 
-    def __init__(self, title, year, genre):
+    def __init__(self, title, year, genre, ms):
         self.title = title
         self.year = year
         self.genre = genre
-        self.no_play = 100
+        self.no_playes = 100
         self.ms = ms
         self.movie_tracker.append(self) 
 
     def __str__(self):
-        return f' {self.title} {self.year}' 
+        return f' {self.title} ({self.year})' 
 
     def __repr__(self):
         return f" title = {self.title} year = {self.year}" 
   
-    def play(self, step=1):
-        self.no_play += step
+    ##return random number for played movie
+    def movies_watched():
+        no_playes = randrange(1, 100)
+        return(no_playes)
+        movie_tracker.append([no_playes])
 
-        ##jeżeli obejrzany, ile razy. Albo słownik z elementami, times - tuple - ile razy obejrzany. Nie dodawaj drugi raz
-           ## w play. bo tam oglądam. 
-           #  
+    def play(self, step=1):
+        self.no_playes += step
+      
 movie1 = Movies(title = "The Producers", year = "1968", genre = "comedy", ms = "m")
 movie2 = Movies(title = "The Bourne Identity", year = "2002", genre = "thriller", ms = "m")
 movie3 = Movies(title = "The Duck Soup", year = "1933", genre = "comedy", ms = "m")
@@ -36,21 +42,16 @@ movie12 = Movies(title = "Blade", year = "1998", genre = "horror", ms = "m")
 movie13 = Movies(title = "Ghostbusters", year = "1984", genre = "comedy", ms = "m")
 movies_list = [movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12, movie13]
 
-##for movie in Movies.movie_tracker:
-##    print(movie.title, movie.year)
-
 class TV_series(Movies):
     series_tracker = []
 
-    def __init__(self, title, year, genre):
+    def __init__(self, title, year, genre, ms):
         super().__init__(title, year, genre)
         self.series_tracker.append(self)
         ##Variables
-        self.episode_no = 0
-        self.season_no = 0
         self.episodes_per_season = 10
         self.seasons_count = 5
-        self.no_play = 100
+        self.no_playes = 100
         self.ms = ms
 
     def __str__(self):
@@ -59,30 +60,23 @@ class TV_series(Movies):
     def __repr__(self):
         return f" title = title = {self.title} S, season_no = {self.season_no} E, episode_no = {self.episode_no}"
 
-    def play(self, step=1):
-        self.no_play += step
+    def watched_series(self, step = 1):
+        ##self.no_playes += step
         self.season_no < 6
-        if self.episode_no == 10: ## zmienna
-            self.season_no += step
-            self.episode_no == 1
-        else: 
-            self.episode_no += step
-        "Ostatni odcinek lub zerować"
-
-    @property
-    def episode(self):
-        return self._episode_no
-
-    @episode.setter
-    def episode(self, number):
-        if number <= 250:
-            self._episode_no = number
-        else:
-            raise ValueError(f"Please check epiode_no. {number}")
-    
-    def series(self, step = 1):
-        self.season_no += step
-
+        self.episode_no = 0
+        self.season_no = 1
+        for _ in range (0,10)
+            return self.episode_no
+            if self.episode_no == 10: 
+                self.season_no += step
+                self.episode_no == 1
+            elif: 
+                self.season_no == 5
+                self.episode_no == 10
+                continue
+            else: 
+                self.episode_no += step
+             
 series1 = TV_series(title = "House M.D.", year = "2004 - 2007", genre = "drama", ms = "s")
 series2 = TV_series(title = "Doctor Who", year = "1963 - 2020 ", genre = "Sci-Fi", ms = "s"  )
 series3 = TV_series(title = "The Big Bang Theory ", year = "2007 - 2019 ", genre = "comedy", ms = "s" )
@@ -98,7 +92,6 @@ series12 = TV_series(title = "Nash Bridges", year = "1996 - 2001", genre = "crim
 series13 = TV_series(title = "Castle", year = "2009 - 2016", genre = "criminal", ms = "s" )
 series_list = [series1, series2, series3, series4, series5, series6, series7, series8, series9, series10, series11, series12, series13]
 
-
 class Library(Movies, TV_series):
     Library_list = [series_list] + [movies_list]
     
@@ -111,15 +104,24 @@ class Library(Movies, TV_series):
         self.no_play = 100
         self.ms = ms
 
-## watch movie metoda, tworzy obiekt movie i wrzuca do listy. self.series_list, self.series. 
-##i dodawać do tej listy bezpośrednio. linia 99 library.add_series (series1)
- ##Library.watch_series(series1) i doda do series list i że odcinek obejrzany 
+    ##Methods that implement new items to the list of movies and list of series
+    def watch_movie():
+        for movie in Movies:
+            movie_tracker.append(movie))) 
+        return  movie_tracker
+
+    def watch_series():
+        for series in TV_series:
+            series_tracker.append(series))) 
+        return  series_tracker
+
+##Library.watch_series(series1) i doda do series list i że odcinek obejrzany 
 ##Library.watch_series(series2)
  
     def get_movies():
         nl = '\n'
         by_title = sorted(Library_list, key = self.title ) ## sortować movie_list
-        if self.ms = "m":
+        if self.ms == "m":
             for item in Library_list:
                 print(by_title, nl) 
     
@@ -127,7 +129,7 @@ class Library(Movies, TV_series):
     def get_series():
         nl = '\n'
         by_title = sorted(Library_list, key = self.title) ## sortować * series_list
-        if self.ms = "s":
+        if self.ms == "s":
             for item in Library_list:
                 print(by_title, nl) 
 
@@ -143,7 +145,7 @@ class Library(Movies, TV_series):
     def generate_views():
         random_view = random.choice(Library_list)
         random_number = randrange(1, 100)
-        print(random_number, random.view)
+        print(random_view, random_number)
 
     def generate_views_10():
         for _ in range(10):
@@ -153,7 +155,7 @@ class Library(Movies, TV_series):
         by_no_play = sorted(Library_list, key = self.no_of_play)
         content_type = input("Wybierz czy chcesz zobaczyć listę filmów czy serii m/s: ")
         content_type = self.ms
-        number = int(input("Podaj proszę liczbę Top Tytułów, które chcesz zobaczyć: ")
+        number = int(input("Podaj proszę liczbę Top Tytułów, które chcesz zobaczyć: "))
         nl = '\n'
         if content_type == "m":
             if ms == "m": 
@@ -163,9 +165,24 @@ class Library(Movies, TV_series):
              if ms == "s": 
                 for serie in Library_list in range (0, number): 
                     print (serie, nl)
-        elif content_type == ""
+        elif content_type == "":
                 for item in Library_list in range (0, number): 
                     print (item, nl) 
         else:
             print("Niewłaściwy parametr")
             exit(1) 
+
+print("Biblioteka filmów")
+
+for item in Library_list:
+    print(self.title, self.year, self.genre)
+
+generate_views_10()
+
+date =  date.today()
+print (f'Najpopularniejsze filmy i seriale dnia {date} to: {Library_list.top_title()}')
+
+by_no_play = sorted(Library_list, key = self.no_of_play)
+print ("Pierwsza trójka filmów i seriali to: {by_no_play[:3]}")
+
+
